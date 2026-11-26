@@ -1,0 +1,94 @@
+/* GLOBAL */
+body {
+    background-color: #f6f8f7; 
+    color: #000;
+}
+
+/* HERO */
+.hero-section {
+    background-color:rgb(46, 65, 43);
+    padding: 80px 0;
+    color: #fff;
+}
+
+.hero-title {
+    font-size: 42px;
+    color: rgb(74,109,66); 
+    font-weight: 700;
+}
+
+.hero-text {
+    color: #ddd;
+    margin: 20px 0;
+}
+
+/* BUTTONS */
+.btn-success {
+    background-color: rgb(74,109,66);
+    border-color: rgb(74,109,66);
+    color: #fff;
+}
+
+.btn-success:hover {
+    background-color: rgb(48,63,45);
+    border-color: rgb(48,63,45);
+}
+
+/* SECTIONS */
+.section-light, .section-white {
+    background-color: rgb(48,63,45);
+    padding: 60px 0;
+    color: #fff;
+}
+
+/* TITLES */
+.section-title, h2, h4 {
+    color: rgb(74,109,66);
+}
+
+/* PRODUCT CARDS */
+.product-card {
+    background-color: rgb(48,63,45);
+    border-radius: 10px;
+    padding: 15px;
+    text-align: center;
+    transition: transform 0.3s, box-shadow 0.3s;
+    color: #fff;
+}
+
+.product-card img {
+    height: 160px;
+    object-fit: contain;
+    margin-bottom: 10px;
+}
+
+.product-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 12px 25px rgb(48, 63, 45);
+}
+
+
+/* SERVICES */
+.service-card {
+    background-color: rgb(48,63,45);
+    color: #fff;
+    transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.service-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 15px 30px rgb(48, 63, 45);
+}
+
+/* ALERTS */
+.alert-success {
+    background-color: rgb(74,109,66);
+    border-color: rgb(74,109,66);
+    color: #fff;
+}
+
+/* FOOTER */
+footer {
+    background-color: rgb(37, 49, 35);
+    color: #fff;
+}

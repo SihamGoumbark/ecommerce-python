@@ -1,0 +1,58 @@
+{% extends 'store/base.html' %}
+{% load static %}
+
+{% block title %}Panier{% endblock %}
+
+{% block content %}
+<div class="container my-5">
+    <h2 class="mb-4 text-center" style="color:#01796F;">Votre Panier</h2>
+
+    {% if cart_details %}
+    <div class="table-responsive shadow-sm rounded p-3" style="background-color:#F5F5F5;">
+        <table class="table table-hover align-middle">
+            <thead class="table-light">
+                <tr>
+                    <th>Produit</th>
+                    <th>Prix</th>
+                    <th>Quantité</th>
+                    <th>Sous-total</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for item in cart_details %}
+                <tr>
+                    <td class="d-flex align-items-center">
+                        <img src="{{ item.product.image.url }}" alt="{{ item.product.name }}"
+                             class="img-thumbnail me-3"
+                             style="height:80px; width:80px; object-fit:contain; border:1px solid #ddd;">
+                        <span>{{ item.product.name }}</span>
+                    </td>
+                    <td>{{ item.product.price }} MAD</td>
+                    <td>{{ item.quantity }}</td>
+                    <td>{{ item.subtotal }} MAD</td>
+                    <td>
+                        <a href="{% url 'remove_from_cart' item.product.id %}" 
+                           class="btn btn-outline-danger btn-sm">
+                            Supprimer
+                        </a>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+    <div class="d-flex flex-column flex-md-row justify-content-between align-items-center mt-4 p-3 shadow-sm rounded"
+         style="background-color:#E8F5F2;">
+        <h4>Total : <span class="text-success">{{ total }} MAD</span></h4>
+        <a href="{% url 'checkout' %}" class="btn btn-success btn-lg mt-2 mt-md-0">Passer à la commande</a>
+    </div>
+
+    {% else %}
+    <div class="alert alert-info text-center p-3 shadow-sm rounded">
+        Votre panier est vide. <a href="{% url 'shop' %}">Retour à la boutique</a>
+    </div>
+    {% endif %}
+</div>
+{% endblock %}

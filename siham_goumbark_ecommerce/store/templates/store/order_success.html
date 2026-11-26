@@ -1,0 +1,15 @@
+{% extends 'store/base.html' %}
+
+{% block title %}Commande réussie{% endblock %}
+
+{% block content %}
+<div class="text-center">
+    <h2 class="text-success">Commande confirmée ✔</h2>
+    <p>Merci pour votre achat.</p>
+    <p><strong>Total :</strong> {{ total }} DH</p>
+
+    <a href="/shop/" class="btn btn-primary mt-3">
+        Retour à la boutique
+    </a>
+</div>
+{% endblock %}
