@@ -18,82 +18,82 @@
 <body>
 
 <!-- Navbar -->
-<nav class="navbar navbar-expand-lg navbar-dark" style="background-color: rgb(37,49,35);">
+<nav class="navbar navbar-expand-xl navbar-dark sticky-top shadow-sm py-3" style="background-color: rgb(37,49,35);">
     <div class="container">
-        <a class="navbar-brand fw-bold" href="/">E-Shop</a>
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+        <a class="navbar-brand fw-bold fs-4" href="/">E-Shop</a>
+
+        <!-- Bouton 3 chrtat -->
+        <button class="navbar-toggler border-0 shadow-none" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Menu">
             <span class="navbar-toggler-icon"></span>
         </button>
 
         <div class="collapse navbar-collapse" id="navbarNav">
-            <form class="d-flex ms-3" method="get" action="{% url 'shop' %}">
-                <input class="form-control me-2" type="search" placeholder="Rechercher un produit..." aria-label="Search" name="q" value="{{ request.GET.q|default:'' }}">
-                <button class="btn btn-outline-light" type="submit">Rechercher</button>
+            <!-- Barre de recherche -->
+            <form class="d-flex my-3 my-xl-0 ms-xl-4 me-xl-auto" method="get" action="{% url 'shop' %}">
+                <div class="input-group input-group-sm">
+                    <input class="form-control" type="search" placeholder="Rechercher un produit..." aria-label="Search" name="q" value="{{ request.GET.q|default:'' }}">
+                    <button class="btn btn-outline-light" type="submit"><i class="fas fa-search"></i></button>
+                </div>
             </form>
 
-            <ul class="navbar-nav ms-auto align-items-center">
-
-                <!-- Accueil -->
+            <!-- Liens de navigation -->
+            <ul class="navbar-nav align-items-xl-center gap-2 gap-xl-3">
                 <li class="nav-item">
                     <a class="nav-link" href="/">Accueil</a>
                 </li>
 
-                <!-- Boutique -->
                 <li class="nav-item">
                     <a class="nav-link" href="/shop/">Boutique</a>
                 </li>
 
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'contact' %}">Contact</a>
+                </li>
+
                 <!-- Panier -->
-                <li class="nav-item position-relative">
-                    <a class="nav-link" href="/cart/">Panier
+                <li class="nav-item">
+                    <a class="nav-link d-inline-flex align-items-center gap-1" href="/cart/">
+                        <i class="fas fa-shopping-cart"></i> Panier
                         {% if request.session.cart %}
-                        <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-success">
+                        <span class="badge rounded-pill bg-success ms-1">
                             {{ request.session.cart|length }}
                         </span>
                         {% endif %}
                     </a>
                 </li>
 
-                <!-- Wishlist & Commandes (connecté uniquement) -->
                 {% if user.is_authenticated %}
-                <li class="nav-item position-relative ms-3">
-                    <a class="nav-link" href="{% url 'wishlist' %}">
-                        <i class="fas fa-heart"></i> Wishlist
+                <!-- Wishlist -->
+                <li class="nav-item">
+                    <a class="nav-link d-inline-flex align-items-center gap-1" href="{% url 'wishlist' %}">
+                        <i class="fas fa-heart text-danger"></i> Wishlist
                         {% with user.wishlist_set.count as wishlist_count %}
                             {% if wishlist_count > 0 %}
-                            <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
+                            <span class="badge rounded-pill bg-danger ms-1">
                                 {{ wishlist_count }}
                             </span>
                             {% endif %}
                         {% endwith %}
                     </a>
                 </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="{% url 'orders' %}">Mes commandes</a>
-                </li>
-                {% endif %}
 
-                <!-- Contact -->
-                <li class="nav-item">
-                    <a class="nav-link" href="{% url 'contact' %}">Contact</a>
-                </li>
-
-                <!-- Compte & Connexion / Déconnexion -->
-                {% if user.is_authenticated %}
-                <li class="nav-item ms-3">
-                    <a class="nav-link fw-bold" href="{% url 'profile' %}">
-                        <i class="fas fa-user"></i> {{ user.username }}
+                <!-- Menu Compte (Profil, Commandes, Déconnexion) -->
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle btn btn-outline-light btn-sm px-3 text-start" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        <i class="fas fa-user me-1"></i> {{ user.username }}
                     </a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="{% url 'logout' %}">Déconnexion</a>
+                    <ul class="dropdown-menu dropdown-menu-end dropdown-menu-dark">
+                        <li><a class="dropdown-item" href="{% url 'profile' %}"><i class="fas fa-id-card me-2"></i>Mon profil</a></li>
+                        <li><a class="dropdown-item" href="{% url 'orders' %}"><i class="fas fa-box me-2"></i>Mes commandes</a></li>
+                        <li><hr class="dropdown-divider"></li>
+                        <li><a class="dropdown-item text-danger" href="{% url 'logout' %}"><i class="fas fa-sign-out-alt me-2"></i>Déconnexion</a></li>
+                    </ul>
                 </li>
                 {% else %}
-                <li class="nav-item ms-3">
-                    <a class="nav-link" href="{% url 'login' %}">Connexion</a>
+                <li class="nav-item">
+                    <a class="btn btn-outline-light btn-sm px-3" href="{% url 'login' %}">Connexion</a>
                 </li>
                 {% endif %}
-
             </ul>
         </div>
     </div>
@@ -119,9 +119,9 @@
 <!-- Footer -->
 <footer class="text-white py-4 mt-5" style="background-color: rgb(37,49,35);">
     <div class="container text-center">
-        <p>Email: contact@eshop.com | Téléphone: +212 6XXXXXXXX</p>
-        <p>Adresse: Casablanca, Maroc</p>
-        <p>&copy; 2025 E-Shop. Tous droits réservés.</p>
+        <p class="mb-1">Email : contact@eshop.com | Téléphone : +212 6 67 89 37 03</p>
+        <p class="mb-1">Adresse : Casablanca, Maroc</p>
+        <p class="mb-0 small text-white-50">&copy; 2026 E-Shop. Tous droits réservés.</p>
     </div>
 </footer>
 
